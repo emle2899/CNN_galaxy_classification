@@ -24,24 +24,24 @@ def train_val_holdout(root_path, final_path, df, train_ratio = 0.7, validation_r
 		for name in files:
 			ext = name.split('.')[-1]
 			galaxy_id = name.split('.')[0]
-			if ext in ['jpg','png']:
-				current_path = os.path.join(root,name)
-				# root_dir, category = os.path.split(root)
-				category = df.query('GalaxyID == @galaxy_id')['labels'].values[0]
-				val_split_dir = choice([train_folder, validation_folder, holdout_folder],
-				1, p =[train_ratio, validation_ratio, holdout_ratio])[0]
+			# if ext in ['jpg','png']:
+			current_path = os.path.join(root,name)
+			# root_dir, category = os.path.split(root)
+			category = df.query('GalaxyID == galaxy_id')['labels'].values[0]
+			val_split_dir = choice([train_folder, validation_folder, holdout_folder],
+			1, p =[train_ratio, validation_ratio, holdout_ratio])[0]
 
 
-				new_dir = os.path.join(val_split_dir, category)
-				if not os.path.exists(new_dir):
-					os.makedirs(new_dir)
+			new_dir = os.path.join(val_split_dir, category)
+			if not os.path.exists(new_dir):
+				os.makedirs(new_dir)
 
-				new_path = os.path.join(new_dir, name)
-				o_img = cv2.imread(current_path)
-				new_img = cv2.resize(o_img, resize_size)
-				cv2.imwrite(new_path,new_img)
-				print(new_path,i)
-				i += 1
+			new_path = os.path.join(new_dir, name)
+			o_img = cv2.imread(current_path)
+			new_img = cv2.resize(o_img, resize_size)
+			cv2.imwrite(new_path,new_img)
+			print(new_path,i)
+			i += 1
 
 
 def read_images(paths):
