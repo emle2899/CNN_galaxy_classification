@@ -14,9 +14,9 @@ import shutil
 from numpy.random import choice
 
 def train_val_holdout(root_path, final_path, df, n_images = 350, train_ratio = 0.7, validation_ratio = 0.2, holdout_ratio = 0.1, resize_size = (425,425)):
-	train_folder = final_path + '/datasets/train'
-	validation_folder = final_path + '/datasets/validation'
-	holdout_folder = final_path + '/datasets/holdout'
+	train_folder = final_path + '/train'
+	validation_folder = final_path + '/validation'
+	holdout_folder = final_path + '/holdout'
 
 	for root, dirs, files in os.walk(root_path, topdown=False):
 		i = 0
