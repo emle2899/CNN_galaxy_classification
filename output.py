@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from eda import read_images, targets, train_val_holdout, process_images, remove_dir
-from cnn import CNNModel
 
 if __name__ == '__main__':
     # create train, validation, and holdout folders
