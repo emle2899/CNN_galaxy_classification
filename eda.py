@@ -28,7 +28,8 @@ def train_val_holdout(root_path, final_path, df, train_ratio = 0.7, validation_r
 				current_path = os.path.join(root,name)
 				# root_dir, category = os.path.split(root)
 				root_dir, category = os.path.split(root)
-               	val_split_dir = choice ([train_folder, validation_folder, holdout_folder], 1, p =[train_ratio, validation_ratio, holdout_ratio])[0]
+				val_split_dir = choice([train_folder, validation_folder, holdout_folder],
+				1, p =[train_ratio, validation_ratio, holdout_ratio])[0]
 
 
 				new_dir = os.path.join(val_split_dir, category)
