@@ -20,5 +20,5 @@ if __name__ == '__main__':
     train_val_holdout('~/CNN_galaxy_classification/data/image_data', 'data', df_lbl)
 
     # remove 'other' folder completely for training only on images with a consensus on label
-    paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
-    remove_dir(paths_other)
+    # paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
+    # remove_dir(paths_other)
