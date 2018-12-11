@@ -113,8 +113,8 @@ class CNNModel(object):
                         rotation_range=50*self.augmentation_strength,
                         width_shift_range=self.augmentation_strength,
                         height_shift_range=self.augmentation_strength,
-                        shear_range=self.augmentation_strength,
-                        horizontal_flip = True
+                        # shear_range=self.augmentation_strength,
+                        horizontal_flip = True,
                         zoom_range=self.augmentation_strength
                         )
 
