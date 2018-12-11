@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # data.to_csv('data/galaxy_labels.csv', index=False)
 
     df_lbl = pd.read_csv('data/galaxy_labels.csv')
-    train_val_holdout('~/CNN_galaxy_classification/data/image_data', 'data', df_lbl)
+    train_val_holdout('data/image_data', 'data', df_lbl)
 
     # remove 'other' folder completely for training only on images with a consensus on label
     # paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')

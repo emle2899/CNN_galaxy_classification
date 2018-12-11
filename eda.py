@@ -13,7 +13,7 @@ from sklearn.utils import resample
 import shutil
 from numpy.random import choice
 
-def train_val_holdout(root_path, final_path, df, n_images = 350, train_ratio = 0.7, validation_ratio = 0.2, holdout_ratio = 0.1, resize_size = (425,425)):
+def train_val_holdout(root_path, final_path, df, train_ratio = 0.7, validation_ratio = 0.2, holdout_ratio = 0.1, resize_size = (299,299)):
 	train_folder = final_path + '/train'
 	validation_folder = final_path + '/validation'
 	holdout_folder = final_path + '/holdout'
