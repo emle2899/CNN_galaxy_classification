@@ -262,7 +262,7 @@ class CNNModel(object):
 
         # plot each image in image_ind and save
         for i in image:
-            im = plt.imread('data/datasets/holdout/'+self.filenames[i])
+            im = plt.imread('data/holdout/'+self.filenames[i])
             plt.imshow(im)
             plt.title(self.true[i])
             plt.xlabel(self.predictions[i])
@@ -271,9 +271,9 @@ class CNNModel(object):
 
 
 if __name__ == '__main__':
-    train_folder = 'data/datasets/train'
-    validation_folder = 'data/datasets/validation'
-    holdout_folder = 'data/datasets/holdout'
+    train_folder = 'data/train'
+    validation_folder = 'data/validation'
+    holdout_folder = 'data/holdout'
     target_size = (299,299)  # 299,299 is suggested for xception
     CNN = CNNModel(train_folder, validation_folder, holdout_folder, target_size = target_size, preprocessing=preprocess_input)
     CNN.fitting()
