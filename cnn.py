@@ -110,12 +110,12 @@ class CNNModel(object):
         # starting with no augmentation
         train_datagen = ImageDataGenerator(
                         preprocessing_function=self.preprocessing,
-                        rotation_range=50*self.augmentation_strength,
-                        width_shift_range=self.augmentation_strength,
-                        height_shift_range=self.augmentation_strength,
-                        shear_range=self.augmentation_strength,
-                        horizontal_flip = True,
-                        zoom_range=self.augmentation_strength
+                        # rotation_range=50*self.augmentation_strength,
+                        # width_shift_range=self.augmentation_strength,
+                        # height_shift_range=self.augmentation_strength,
+                        # shear_range=self.augmentation_strength,
+                        # horizontal_flip = True,
+                        # zoom_range=self.augmentation_strength
                         )
 
         # no need for augmentation on validation images
@@ -164,7 +164,7 @@ class CNNModel(object):
         counter = Counter(self.train_generator.classes)
         max_val = float(max(counter.values()))
         class_weights = {class_id : max_val/num_images for class_id, num_images in counter.items()}
-
+        import pdb; pdb.set_trace()
         hist = callbacks.History()
 
         self.history = self.model.fit_generator(self.train_generator,
@@ -179,7 +179,7 @@ class CNNModel(object):
     def evaluate(self):
 
         self.best_model = load_model('checkpoint.hdf5')
-
+        pdb.set_trace()
         predict = self.best_model.predict_generator(self.holdout_generator,
                                                 steps = self.nHoldout/self.batch_size,
                                                 use_multiprocessing=True,
@@ -194,7 +194,7 @@ class CNNModel(object):
                                             )
 
         self.predicted_class_indices = np.argmax(predict,axis=1)
-
+        pdb.set_trace()
         self.target_names = (self.train_generator.class_indices)
         self.target_names = dict((v,k) for k,v in self.target_names.items())
         self.predictions = [self.target_names[k] for k in self.predicted_class_indices]
@@ -203,7 +203,7 @@ class CNNModel(object):
         self.true = [self.target_names[k] for k in self.true_class_indices]
         # self.results=pd.DataFrame({"Filename":self.filenames,
         #                       "Predictions":self.predictions})
-
+        pdb.set_trace()
         return metric
 
 
@@ -211,7 +211,7 @@ class CNNModel(object):
         class_names = list(self.target_names.values())
         report = classification_report(self.true_class_indices, self.predicted_class_indices, target_names=class_names)
         cm = confusion_matrix(y_true=self.true_class_indices, y_pred=self.predicted_class_indices)
-
+        pdb.set_trace()
         return class_names, report, cm
 
     def plot_history(self):
@@ -272,9 +272,7 @@ if __name__ == '__main__':
     metric = CNN.evaluate()
     class_names, report, cm = CNN.class_report()
 
-    # pickle model & metrics
-    with open('evaluate/model.pkl', 'wb') as f:
-        pickle.dump(CNN, f)
+    # pickle metrics
 
     with open('evaluate/metric.txt', 'w') as f:
         f.write(repr(metric))
