@@ -255,12 +255,11 @@ class CNNModel(object):
 
         # plot each image in image_ind and save
         for i in image:
-            fig_name = str('images/image'+ i +'.png')
             im = plt.imread('data/holdout/'+self.filenames[i])
             plt.imshow(im)
             plt.title(self.true[i])
             plt.xlabel(self.predictions[i])
-            plt.savefig(fig_name)
+            plt.savefig('images/galaxyid'+ str(i) +'.png')
             plt.show()
 
 
