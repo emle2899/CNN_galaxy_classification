@@ -80,13 +80,11 @@ class CNNModel(object):
 
         # flattens images to go into dense layers
         self.model.add(Flatten())
-        pdb.set_trace()
 
         # first dense layer
         self.model.add(Dense(2048, init = 'glorot_normal'))
         self.model.add(Activation('relu'))
         self.model.add(Dropout(0.5))
-        pdb.set_trace()
 
         # second dense layer
         self.model.add(Dense(2048, init= 'glorot_normal'))
@@ -166,7 +164,6 @@ class CNNModel(object):
         counter = Counter(self.train_generator.classes)
         max_val = float(max(counter.values()))
         class_weights = {class_id : max_val/num_images for class_id, num_images in counter.items()}
-        pdb.set_trace()
         hist = callbacks.History()
 
         # include 15 workers for aws
@@ -183,7 +180,6 @@ class CNNModel(object):
     def evaluate(self):
 
         self.best_model = load_model('checkpoint.hdf5')
-        pdb.set_trace()
         predict = self.best_model.predict_generator(self.holdout_generator,
                                                 steps = self.nHoldout/self.batch_size,
                                                 use_multiprocessing=True,
@@ -198,7 +194,6 @@ class CNNModel(object):
                                             )
 
         self.predicted_class_indices = np.argmax(predict,axis=1)
-        pdb.set_trace()
         self.target_names = (self.train_generator.class_indices)
         self.target_names = dict((v,k) for k,v in self.target_names.items())
         self.predictions = [self.target_names[k] for k in self.predicted_class_indices]
