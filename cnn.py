@@ -279,9 +279,6 @@ if __name__ == '__main__':
     with open('evaluate/metric.txt', 'w') as f:
         f.write(repr(metric))
 
-    with open('evaluate/cm.txt', 'wb') as f2:
-        f2.write(repr(cm))
-
     with open('evaluate/class_names.pkl', 'wb') as f3:
         pickle.dump(class_names, f3)
 
