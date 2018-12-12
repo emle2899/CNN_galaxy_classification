@@ -111,12 +111,9 @@ if __name__ == '__main__':
 
     pdb.set_trace()
     df_id = pd.DataFrame({'GalaxyID': id_num})
-    data = pd.merge(df_id, df_new, on = 'GalaxyID', how = 'inner')
+    data = pd.merge(df_id, df_new, on = 'GalaxyID', how = 'left')
     pdb.set_trace()
-    data.to_csv('data/galaxy_labels.csv', index=False)
-
-    df_lbl = pd.read_csv('data/galaxy_labels.csv')
-    train_val_holdout('data/image_data', 'data', df_lbl)
+    train_val_holdout('data/image_data', 'data', data)
 
     # remove 'other' folder completely for training only on images with a consensus on label
     # paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
