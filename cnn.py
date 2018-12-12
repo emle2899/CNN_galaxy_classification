@@ -112,12 +112,12 @@ class CNNModel(object):
         # starting with no augmentation
         train_datagen = ImageDataGenerator(
                         preprocessing_function=self.preprocessing,
-                        # rotation_range=50*self.augmentation_strength,
-                        # width_shift_range=self.augmentation_strength,
-                        # height_shift_range=self.augmentation_strength,
-                        # shear_range=self.augmentation_strength,
-                        # horizontal_flip = True,
-                        # zoom_range=self.augmentation_strength
+                        rotation_range=50*self.augmentation_strength,
+                        width_shift_range=self.augmentation_strength,
+                        height_shift_range=self.augmentation_strength,
+                        shear_range=self.augmentation_strength,
+                        horizontal_flip = True,
+                        zoom_range=self.augmentation_strength
                         )
 
         # no need for augmentation on validation images
@@ -155,7 +155,7 @@ class CNNModel(object):
         self.conv()
         self.make_generator()
 
-        sgd = optimizers.SGD(lr=0.005, decay=1e-6, momentum=0.9, nesterov=True)
+        sgd = optimizers.SGD(lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
         self.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
         early_stopping = callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='auto')
@@ -169,6 +169,7 @@ class CNNModel(object):
         pdb.set_trace()
         hist = callbacks.History()
 
+        # include 15 workers for aws
         self.history = self.model.fit_generator(self.train_generator,
                                         steps_per_epoch=self.nTrain/self.batch_size,
                                         epochs=self.nb_epoch,
@@ -206,16 +207,13 @@ class CNNModel(object):
         self.true = [self.target_names[k] for k in self.true_class_indices]
         # self.results=pd.DataFrame({"Filename":self.filenames,
         #                       "Predictions":self.predictions})
-        pdb.set_trace()
         return metric
 
 
     def class_report(self):
         class_names = list(self.target_names.values())
         report = classification_report(self.true_class_indices, self.predicted_class_indices, target_names=class_names)
-        cm = confusion_matrix(y_true=self.true_class_indices, y_pred=self.predicted_class_indices)
-        pdb.set_trace()
-        return class_names, report, cm
+        return class_names, report
 
     def plot_history(self):
         # Plot training & validation accuracy values
@@ -257,11 +255,12 @@ class CNNModel(object):
 
         # plot each image in image_ind and save
         for i in image:
+            fig_name = str('images/image'+ i +'.png')
             im = plt.imread('data/holdout/'+self.filenames[i])
             plt.imshow(im)
             plt.title(self.true[i])
             plt.xlabel(self.predictions[i])
-            plt.savefig('images/image{}'.format(i)+'.png')
+            plt.savefig(fig_name)
             plt.show()
 
 
