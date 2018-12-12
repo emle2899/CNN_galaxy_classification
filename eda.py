@@ -113,9 +113,9 @@ if __name__ == '__main__':
     df_id = pd.DataFrame({'GalaxyID': id_num})
     data = pd.merge(df_id, df_new, on = 'GalaxyID', how = 'left')
 	# any that could not be classified moved to 'other' category
-	df_lbl = data.fillna('other')
+	data = data.fillna('other')
     pdb.set_trace()
-    train_val_holdout('data/image_data', 'data', df_lbl)
+    train_val_holdout('data/image_data', 'data', data)
 
     # remove 'other' folder completely for training only on images with a consensus on label
     # paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
