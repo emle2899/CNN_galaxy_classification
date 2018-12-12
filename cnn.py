@@ -134,7 +134,8 @@ class CNNModel(object):
                                         target_size=self.target_size,
                                         batch_size=self.batch_size,
                                         class_mode='categorical',
-                                        shuffle=True)
+                                        shuffle=True,
+                                        workers=15)
 
         self.validation_generator = validation_datagen.flow_from_directory(
                                                     self.validation_folder,
