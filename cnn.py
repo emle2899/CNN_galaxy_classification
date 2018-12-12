@@ -134,8 +134,7 @@ class CNNModel(object):
                                         target_size=self.target_size,
                                         batch_size=self.batch_size,
                                         class_mode='categorical',
-                                        shuffle=True,
-                                        workers=15)
+                                        shuffle=True)
 
         self.validation_generator = validation_datagen.flow_from_directory(
                                                     self.validation_folder,
@@ -176,7 +175,8 @@ class CNNModel(object):
                                         validation_data=self.validation_generator,
                                         validation_steps=self.nVal/self.batch_size,
                                         callbacks=[checkpointer, early_stopping, hist],
-                                        class_weight = class_weights
+                                        class_weight = class_weights,
+                                        workers=15
                                         )
 
     def evaluate(self):
