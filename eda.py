@@ -99,24 +99,20 @@ def process_images(images, size = 60):
     return arr.astype(int)
 
 if __name__ == '__main__':
-    # create train, validation, and holdout folders
-    df = pd.read_csv('data/training_solutions_rev1.csv')
-    paths = 'data/image_data/'
+	# create train, validation, and holdout folders
+	df = pd.read_csv('data/training_solutions_rev1.csv')
+	paths = 'data/image_data/'
 
-    # Allowing 70% agreements to classify galaxies
-    df = targets(df, p = 0.70)
-    import pdb; pdb.set_trace()
-    df_new = df.filter(['GalaxyID','labels'], axis=1)
-    id_num = read_images(paths)
+	# Allowing 70% agreements to classify galaxies
+	df = targets(df, p = 0.70)
+	df_new = df.filter(['GalaxyID','labels'], axis=1)
+	id_num = read_images(paths)
 
-    pdb.set_trace()
-    df_id = pd.DataFrame({'GalaxyID': id_num})
-    data = pd.merge(df_id, df_new, on = 'GalaxyID', how = 'left')
-	# any that could not be classified moved to 'other' category
-	pdb.set_trace()
+	df_id = pd.DataFrame({'GalaxyID': id_num})
+	data = pd.merge(df_id, df_new, on = 'GalaxyID', how = 'left')
 	df_lbl = data.fillna('other')
-    train_val_holdout('data/image_data', 'data', df_lbl)
+	train_val_holdout('data/image_data', 'data', df_lbl)
 
-    # remove 'other' folder completely for training only on images with a consensus on label
-    # paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
-    # remove_dir(paths_other)
+	# remove 'other' folder completely for training only on images with a consensus on label
+	# paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
+	# remove_dir(paths_other)
