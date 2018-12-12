@@ -29,6 +29,8 @@ from keras.applications.xception import preprocess_input
 
 from eda import read_images, targets, train_val_holdout
 
+import pdb
+
 
 
 class CNNModel(object):
@@ -78,13 +80,13 @@ class CNNModel(object):
 
         # flattens images to go into dense layers
         self.model.add(Flatten())
-        # pdb.set_trace()
+        pdb.set_trace()
 
         # first dense layer
         self.model.add(Dense(2048, init = 'glorot_normal'))
         self.model.add(Activation('relu'))
         self.model.add(Dropout(0.5))
-        # pdb.set_trace()
+        pdb.set_trace()
 
         # second dense layer
         self.model.add(Dense(2048, init= 'glorot_normal'))
@@ -164,7 +166,7 @@ class CNNModel(object):
         counter = Counter(self.train_generator.classes)
         max_val = float(max(counter.values()))
         class_weights = {class_id : max_val/num_images for class_id, num_images in counter.items()}
-        import pdb; pdb.set_trace()
+        pdb.set_trace()
         hist = callbacks.History()
 
         self.history = self.model.fit_generator(self.train_generator,
