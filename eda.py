@@ -66,7 +66,7 @@ def targets(df, p = 0.5):
 		(df['Class1.2'] >= p) & (df['Class3.2'] >= p),
 		(df['Class2.1'] >= p) & (df['Class6.2'] >= p),
 		(df['Class1.2'] >= p) & (df['Class3.1'] >= p),
-		(df['Class1.1'] >= p) & (df['Class6.2'] >= p),
+		(df['Class1.1'] >= p) & (df['Class6.2'] >= p)]
 	categories = ['spiral', 'edge_view_spiral', 'barred_spiral', 'elliptical']
 	df['labels'] = np.select(conditions, categories, default='other')
 
