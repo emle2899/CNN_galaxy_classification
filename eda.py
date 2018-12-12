@@ -100,8 +100,8 @@ if __name__ == '__main__':
 	df = pd.read_csv('data/training_solutions_rev1.csv')
 	paths = 'data/image_data/'
 
-	# 70% consensus on questions used for targets
-	df = targets(df, p = 0.70)
+	# 65% consensus on questions used for targets
+	df = targets(df, p = 0.65)
 	df_new = df.filter(['GalaxyID','labels'], axis=1)
 	id_num = read_images(paths)
 
