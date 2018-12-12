@@ -28,9 +28,7 @@ def train_val_holdout(root_path, final_path, df, train_ratio = 0.7, validation_r
 				# current_path = os.path.join(root, name)
                 # root_dir, category = os.path.split(root)
 				current_path = os.path.join(root,name)
-				import pdb; pdb.set_trace()
 				category = df.query('GalaxyID == @galaxy_id')['labels'].values[0]
-				pdb.set_trace()
 				val_split_dir = choice([train_folder, validation_folder, holdout_folder],
 				1, p =[train_ratio, validation_ratio, holdout_ratio])[0]
 
