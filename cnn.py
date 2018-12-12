@@ -36,7 +36,7 @@ import pdb
 class CNNModel(object):
 
     def __init__(self,train_folder, validation_folder, holdout_folder, target_size, augmentation_strength=0.2,
-                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 2):
+                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 50):
         self.model = Sequential()
         self.train_folder = train_folder
         self.validation_folder = validation_folder
@@ -260,7 +260,7 @@ class CNNModel(object):
             plt.imshow(im)
             plt.title(self.true[i])
             plt.xlabel(self.predictions[i])
-            plt.savefig('images/image'+i+'.png')
+            plt.savefig('images/image{}'.format(i)+'.png')
             plt.show()
 
 
@@ -279,14 +279,14 @@ if __name__ == '__main__':
     with open('evaluate/metric.txt', 'w') as f:
         f.write(repr(metric))
 
-    with open('evaluate/cm.txt', 'wb') as f:
-        pickle.dump(cm, f)
+    with open('evaluate/cm.txt', 'wb') as f2:
+        f2.write(repr(cm))
 
-    with open('evaluate/class_names.pkl', 'wb') as f:
-        pickle.dump(class_names, f)
+    with open('evaluate/class_names.pkl', 'wb') as f3:
+        pickle.dump(class_names, f3)
 
-    with open('evaluate/cr.txt', 'w') as f:
-        f.write(repr(report))
+    with open('evaluate/cr.txt', 'w') as f4:
+        f4.write(repr(report))
 
     # get plots
     CNN.plot_history()
