@@ -67,8 +67,7 @@ def targets(df, p = 0.5):
 		(df['Class2.1'] >= p) & (df['Class6.2'] >= p),
 		(df['Class1.2'] >= p) & (df['Class3.1'] >= p),
 		(df['Class1.1'] >= p) & (df['Class6.2'] >= p),
-		(df['Class6.1'] >= p) & (df['Class8.4'] >= p)]
-	categories = ['spiral', 'edge_view_spiral', 'barred_spiral', 'elliptical', 'irregular']
+	categories = ['spiral', 'edge_view_spiral', 'barred_spiral', 'elliptical']
 	df['labels'] = np.select(conditions, categories, default='other')
 
 	return df
@@ -100,8 +99,8 @@ if __name__ == '__main__':
 	df = pd.read_csv('data/training_solutions_rev1.csv')
 	paths = 'data/image_data/'
 
-	# 65% consensus on questions used for targets
-	df = targets(df, p = 0.65)
+	# 70% consensus on questions used for targets
+	df = targets(df, p = 0.70)
 	df_new = df.filter(['GalaxyID','labels'], axis=1)
 	id_num = read_images(paths)
 
