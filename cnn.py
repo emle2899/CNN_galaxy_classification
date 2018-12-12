@@ -34,7 +34,7 @@ from eda import read_images, targets, train_val_holdout
 class CNNModel(object):
 
     def __init__(self,train_folder, validation_folder, holdout_folder, target_size, augmentation_strength=0.2,
-                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 50):
+                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 2):
         self.model = Sequential()
         self.train_folder = train_folder
         self.validation_folder = validation_folder
