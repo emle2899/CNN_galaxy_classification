@@ -36,7 +36,7 @@ import pdb
 class CNNModel(object):
 
     def __init__(self,train_folder, validation_folder, holdout_folder, target_size, augmentation_strength=0.2,
-                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 50):
+                preprocessing=None, batch_size = 16, nb_classes = 4, nb_epoch = 50):
         self.model = Sequential()
         self.train_folder = train_folder
         self.validation_folder = validation_folder
@@ -112,12 +112,12 @@ class CNNModel(object):
         # starting with no augmentation
         train_datagen = ImageDataGenerator(
                         preprocessing_function=self.preprocessing,
-                        rotation_range=50*self.augmentation_strength,
-                        width_shift_range=self.augmentation_strength,
-                        height_shift_range=self.augmentation_strength,
-                        shear_range=self.augmentation_strength,
-                        horizontal_flip = True,
-                        zoom_range=self.augmentation_strength
+                        # rotation_range=50*self.augmentation_strength,
+                        # width_shift_range=self.augmentation_strength,
+                        # height_shift_range=self.augmentation_strength,
+                        # shear_range=self.augmentation_strength,
+                        # horizontal_flip = True,
+                        # zoom_range=self.augmentation_strength
                         )
 
         # no need for augmentation on validation images
@@ -155,7 +155,7 @@ class CNNModel(object):
         self.conv()
         self.make_generator()
 
-        sgd = optimizers.SGD(lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
+        sgd = optimizers.SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
         self.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
         early_stopping = callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='auto')
@@ -286,4 +286,4 @@ if __name__ == '__main__':
 
     # get plots
     CNN.plot_history()
-    CNN.plot_images(image_ind = [3,4,5,10,20,51])
+    CNN.plot_images(image_ind = [3,4,300,500,531])
