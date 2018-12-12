@@ -8,11 +8,11 @@ if __name__ == '__main__':
     df = pd.read_csv('data/training_solutions_rev1.csv')
     paths = 'data/image_data/'
 
-    # Allowing 70% agreement to classify galaxies
+    # Allowing 70% agreements to classify galaxies
     df = targets(df, p = 0.70)
     import pdb; pdb.set_trace()
     df_new = df.filter(['GalaxyID','labels'], axis=1)
-    images, id_num = read_images(paths)
+    id_num = read_images(paths)
 
     pdb.set_trace()
     df_id = pd.DataFrame({'GalaxyID': id_num})

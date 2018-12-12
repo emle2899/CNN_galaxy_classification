@@ -50,11 +50,10 @@ def train_val_holdout(root_path, final_path, df, train_ratio = 0.7, validation_r
 def read_images(paths):
 
 	lst = glob.glob(paths + '*.jpg')
-	images = [cv2.imread(file) for file in lst]
 	names = [os.path.split(file)[1] for file in lst]
 	id_num = [int(file.split('.')[0]) for file in names]
 
-	return images, id_num
+	return id_num
 
 def targets(df, p = 0.5):
 
