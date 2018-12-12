@@ -272,7 +272,7 @@ if __name__ == '__main__':
     CNN = CNNModel(train_folder, validation_folder, holdout_folder, target_size = target_size, preprocessing=preprocess_input)
     CNN.fitting()
     metric = CNN.evaluate()
-    class_names, report, cm = CNN.class_report()
+    class_names, report = CNN.class_report()
 
     # pickle metrics
 
