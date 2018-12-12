@@ -67,9 +67,8 @@ def targets(df, p = 0.5):
 		(df['Class2.1'] >= p) & (df['Class6.2'] >= p),
 		(df['Class1.2'] >= p) & (df['Class3.1'] >= p),
 		(df['Class1.1'] >= p) & (df['Class6.2'] >= p),
-		(df['Class6.1'] >= p) & (df['Class8.4'] >= p),
-		(df['Class1.3'] >= p)]
-	categories = ['spiral', 'edge_view_spiral', 'barred_spiral', 'elliptical', 'irregular', 'star']
+		(df['Class6.1'] >= p) & (df['Class8.4'] >= p)]
+	categories = ['spiral', 'edge_view_spiral', 'barred_spiral', 'elliptical', 'irregular']
 	df['labels'] = np.select(conditions, categories, default='other')
 
 	return df
@@ -101,7 +100,7 @@ if __name__ == '__main__':
 	df = pd.read_csv('data/training_solutions_rev1.csv')
 	paths = 'data/image_data/'
 
-	# Allowing 70% agreements to classify galaxies
+	# 70% consensus on questions used for targets
 	df = targets(df, p = 0.70)
 	df_new = df.filter(['GalaxyID','labels'], axis=1)
 	id_num = read_images(paths)
@@ -112,5 +111,5 @@ if __name__ == '__main__':
 	train_val_holdout('data/image_data', 'data', df_lbl)
 
 	# remove 'other' folder completely for training only on images with a consensus on label
-	# paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
-	# remove_dir(paths_other)
+	paths_other = ('data/holdout/other','data/train/other', 'data/validation/other')
+	remove_dir(paths_other)
