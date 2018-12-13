@@ -36,7 +36,7 @@ import pdb
 class CNNModel(object):
 
     def __init__(self,train_folder, validation_folder, holdout_folder, target_size, augmentation_strength=0.2,
-                preprocessing=None, batch_size = 16, nb_classes = 4, nb_epoch = 50):
+                preprocessing=None, batch_size = 8, nb_classes = 4, nb_epoch = 50):
         self.model = Sequential()
         self.train_folder = train_folder
         self.validation_folder = validation_folder
@@ -107,12 +107,12 @@ class CNNModel(object):
 
 
     def make_generator(self):
-        # starting with no augmentation
+        # try different augmentation
         train_datagen = ImageDataGenerator(
                         preprocessing_function=self.preprocessing,
-                        # rotation_range=50*self.augmentation_strength,
-                        # width_shift_range=self.augmentation_strength,
-                        # height_shift_range=self.augmentation_strength,
+                        rotation_range=50*self.augmentation_strength,
+                        width_shift_range=self.augmentation_strength,
+                        height_shift_range=self.augmentation_strength,
                         # shear_range=self.augmentation_strength,
                         # horizontal_flip = True,
                         # zoom_range=self.augmentation_strength
@@ -200,9 +200,11 @@ class CNNModel(object):
         self.filenames=self.holdout_generator.filenames
         self.true_class_indices = self.holdout_generator.classes
         self.true = [self.target_names[k] for k in self.true_class_indices]
-        # self.results=pd.DataFrame({"Filename":self.filenames,
-        #                       "Predictions":self.predictions})
-        return metric
+        results=pd.DataFrame({"Filename":self.filenames,
+                              "Predictions":self.predictions})
+
+
+        return metric, results
 
 
     def class_report(self):
@@ -218,7 +220,7 @@ class CNNModel(object):
         plt.ylabel('Accuracy')
         plt.xlabel('Epoch')
         plt.legend(['Train', 'Test'], loc='upper left')
-        plt.savefig('images/acc_hist.png')
+        plt.savefig('images/acc_hist2.png')
         plt.close()
         # plt.show()
 
@@ -229,7 +231,7 @@ class CNNModel(object):
         plt.ylabel('Loss')
         plt.xlabel('Epoch')
         plt.legend(['Train', 'Test'], loc='upper left')
-        plt.savefig('images/loss_hist.png')
+        plt.savefig('images/loss_hist2.png')
         plt.close()
         # plt.show()
 
@@ -254,7 +256,7 @@ class CNNModel(object):
             plt.imshow(im)
             plt.title(self.true[i])
             plt.xlabel(self.predictions[i])
-            plt.savefig('images/galaxyid'+ str(i) +'.png')
+            plt.savefig('images/ngalaxyid'+ str(i) +'.png')
             plt.show()
 
 
@@ -265,11 +267,10 @@ if __name__ == '__main__':
     target_size = (299,299)  # 299,299 is suggested for xception
     CNN = CNNModel(train_folder, validation_folder, holdout_folder, target_size = target_size, preprocessing=preprocess_input)
     CNN.fitting()
-    metric = CNN.evaluate()
+    metric, results = CNN.evaluate()
     class_names, report = CNN.class_report()
 
     # pickle metrics
-
     with open('evaluate/metric.txt', 'w') as f:
         f.write(repr(metric))
 
@@ -279,6 +280,8 @@ if __name__ == '__main__':
     with open('evaluate/cr.txt', 'w') as f4:
         f4.write(repr(report))
 
+    results.to_csv('evaluate/results.csv', index=False)
+
     # get plots
     CNN.plot_history()
-    CNN.plot_images(image_ind = [3,4,300,500,531])
+    CNN.plot_images(image_ind = [21,151,153,250,450])
