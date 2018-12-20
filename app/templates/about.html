@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang='en'>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
+  }
+
+  body{
+    background-image:url('https://www.nasa.gov/sites/default/files/potw1424a.jpg');
+    width:100%;
+    background-size: cover;
+  }
+
+  .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* black w/opacity/see-through */
+    color: lightgray;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+</style>
+
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Galactifier</title>
+</head>
+
+<body>
+
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/test">Test</a></li>
+    <li><a href="/about">About</a></li>
+    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
+  </ul>
+  <br>
+
+<div class="bg-text">
+  <center>
+    <h1>About the Project</h1>
+    <h3>This is a student project by Emily Levis for the Galvanize Data Science Immersive Program</h3>
+
+    <h1>Abstract</h1>
+    <h3> Galaxies are one of the most visually stunning cosmic phenomenon and with Sloan Digital Sky Survey and Hubble, we now have thousands of photometry of galaxies to admire. The problem for astronomers, however, is classifying these galaxy images. One solution is using neural networks to classify these images for us.
+
+    This project uses a Convolutional Neural Network (CNN) to classify galaxies, which is a tool already used in many galaxy classifications. This is made possible by projects like Galaxy Zoo/Zooniverse, which asked volunteers to label thousands of galaxies through a series of questions. Thanks to this, there are archives of ton of labeled data to train on.
+    <br>
+
+    <br>
+    The data originally comes from galaxy zoo - a project where volunteers labeled thousands of galaxies through a series of eleven questions. This version of the data is in jpg files from Kaggle.
+    For this project, the computer is identifying spirals and ellipticals, with spirals split into spiral, barred-spirals, and edge-view spirals.
+    While edge-view spirals are not cosmologically different, they are visually different for both the viewer and the computer, hence the separate category.
+    I set up the labels by categorizing user responses by majority percentage vote. As such, there is potential human error in the actual labels.
+    <br>
+    If you would like to know more about the project, please visit my <a href="https://github.com/emle2899/CNN_galaxy_classification" style="color:white;" >Github</a> page. </h3>
+
+    <h1> Resources </h1>
+    <h3> Hubble's galaxy classification diagram below shows the type of galaxies </h3>
+    <br>
+    <img src='https://cdn.spacetelescope.org/archives/images/screen/heic9902o.jpg' alt="Hubble Tuning Fork" border="2" style="width:325px;height:250px;">
+    <p><a href='https://www.spacetelescope.org/images/heic9902o/' style="color:white;" >Hubble Tuning Fork</a></p>
+    <br>
+    <h3> If you would like to read up more on the distinctions between galaxy types, checkout GalaxyZoo's tutorial <p><a href="http://zoo1.galaxyzoo.org/Tutorial.aspx" style="color:white;" >Tutorial</a></p> </h3>
+    <h3> If you would like to participate in public galaxy classification, please visit GalaxyZoo's new source: Zooniverse <p><a href="https://www.zooniverse.org/projects/zookeeper/galaxy-zoo" style="color:white;" >Zooniverse</a></p></h3>
+    <h3> If you would like to learn more about CNN models for galaxy classification, please refer to the original paper that was the inspiration for this project <p><a href="http://cs229.stanford.edu/proj2016/report/GauthierJainNoordeh-GalaxyMorphology-report.pdf" style="color:white;" >Stanford Paper</a></p> </h3>
+
+
+  </center>
+</div>
+
+</body>
+</html>

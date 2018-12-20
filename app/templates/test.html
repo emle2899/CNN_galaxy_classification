@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang='en'>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
+  }
+
+  body{
+    background-image:url('https://www.nasa.gov/sites/default/files/potw1424a.jpg');
+    width:100%;
+    background-size: cover;
+  }
+
+  .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+    color: lightgray;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  button {
+            background-color: white;
+            color: black;
+            border-radius: 14px;
+            border-color:gray;
+            padding-left: 12px;
+            padding-right: 12px;
+            font-size: 14px;
+            font-weight: bold;
+  }
+
+  .move-button {
+  display: flex;
+  justify-content: center;
+  }
+
+</style>
+
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Galactifier</title>
+</head>
+
+<body>
+
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/test">Test</a></li>
+    <li><a href="/about">About</a></li>
+    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
+  </ul>
+  <br>
+
+<div class="bg-text">
+  <center>
+    <h1>Test Your Skills Against A Machine Learning AI</h1>
+    <br>
+
+    <img src=" {{url_for('static',filename=filename)}}" border="2">
+    <br>
+
+    <form action='/predict', method='POST'>
+      <select style="width:130px;height:18px;line-height:3em;overflow:auto;padding:5px" name="class" id="select_class" class="selectpicker form-control">
+        <option selected="selected" value = ''>Select Classification</option>
+        <option value="spiral">spiral</option>
+        <option value="edge_view_spiral">edge-view spiral</option>
+        <option value="barred_spiral">barred-spiral</option>
+        <option value="elliptical">elliptical</option>
+      </select>
+      <br>
+
+      <br>
+      <div class='buttons'>
+      <button type="submit" >submit</button>
+    </form>
+
+  </center>
+</div>
+
+</body>
+</html>

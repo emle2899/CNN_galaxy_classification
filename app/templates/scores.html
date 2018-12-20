@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='en'>
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
+  }
+
+  body{
+    background-image:url('https://www.nasa.gov/sites/default/files/potw1424a.jpg');
+    width:100%;
+    background-size: cover;
+  }
+
+  .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+    color: lightgray;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  table, th, td {
+  border: 1px solid white;
+  }
+
+  button {
+            background-color: white;
+            color: black;
+            border-radius: 14px;
+            border-color:gray;
+            padding-left: 12px;
+            padding-right: 12px;
+            font-size: 14px;
+            font-weight: bold;
+  }
+
+  .move-button {
+  display: flex;
+  justify-content: center;
+  }
+
+</style>
+
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Galactifier</title>
+</head>
+
+<body>
+
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/test">Test</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/scores">Leadboard</a></li>
+    <li style="float:right"><a class="active" href="/contact">Contact</a></li>
+  </ul>
+  <br>
+
+<div class="bg-text">
+  <center>
+    <h1>Leaderboard</h1>
+    <br>
+
+    <h2>{{scoring}}</h2>
+
+  </center>
+</div>
+
+</body>
+</html>
