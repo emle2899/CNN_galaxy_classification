@@ -1,0 +1,1 @@
+'                  precision    recall  f1-score   support\n\n   barred_spiral       0.70      0.71      0.70        95\nedge_view_spiral       0.94      0.97      0.95       186\n      elliptical       0.97      0.93      0.95       815\n          spiral       0.84      0.89      0.86       421\n\n     avg / total       0.91      0.91      0.91      1517\n'
